@@ -13,6 +13,21 @@ namespace CustomHTMLHelperMetod.Library
             string html = string.Format("<button id='{0}' name='{0}' type='{1}'>{2}</button>", id, type.ToString(), text);
             return MvcHtmlString.Create(html);  //verilen stringi html'e cevirir.
         }
+
+        public static MvcHtmlString Button(this HtmlHelper helper, string id = "", string cssClass="",ButtonType type = ButtonType.button, string text = "")
+        {
+            TagBuilder tag = new TagBuilder("button");
+            tag.AddCssClass(cssClass);
+            tag.GenerateId(id);
+            tag.SetInnerText(text);
+
+            tag.Attributes.Add(new KeyValuePair<string, string>("type",type.ToString()));
+            tag.Attributes.Add(new KeyValuePair<string, string>("name",id));
+
+
+            return MvcHtmlString.Create(tag.ToString());
+
+        }
     }
 
         public enum ButtonType
