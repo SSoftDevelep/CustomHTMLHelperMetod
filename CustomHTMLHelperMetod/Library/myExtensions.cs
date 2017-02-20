@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace CustomHTMLHelperMetod.Library
 {
@@ -27,6 +28,13 @@ namespace CustomHTMLHelperMetod.Library
 
             return MvcHtmlString.Create(tag.ToString());
 
+        }
+
+        public static MvcHtmlString Paragraph(this HtmlHelper helper, string id = "", int borderSize = 3, string borderType = "solid", Func<object, HelperResult> template=null)
+        {
+            string html = string.Format
+                ("<p id='{0}' name='{0}' style='border-width:{1}px;border-style:{2}'>{3}</button>", id, borderSize,borderType,template.Invoke(null));
+            return MvcHtmlString.Create(html);  //verilen stringi html'e cevirir.
         }
     }
 
